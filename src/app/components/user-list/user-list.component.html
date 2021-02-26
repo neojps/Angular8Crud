@@ -1,0 +1,66 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by login"
+          [(ngModel)]="login"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchLogin()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Users List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let User of Users; let i = index"
+          [class.active]="i == CurrentIndex"
+          (click)="setActiveUser(User, i)"
+        >
+          {{ User.id }} | {{ User.name }}
+        </li>
+      </ul>
+  
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="CurrentUser">
+        <h4>User</h4>
+        <div>
+          <label><strong>Id:</strong></label> {{ CurrentUser.id }}
+        </div>
+        <div>
+          <label><strong>Name:</strong></label> {{ CurrentUser.name }}
+        </div>
+        <div>
+          <label><strong>Login:</strong></label> {{ CurrentUser.login }}
+        </div>
+        <div>
+          <label><strong>Active:</strong></label>
+          {{ CurrentUser.active ? "Yes" : "No" }}
+        </div>
+        <div>
+            <label><strong>Master:</strong></label>
+            {{ CurrentUser.master ? "Yes" : "NO" }}
+          </div>
+  
+        <a class="badge badge-warning" href="/users/{{ CurrentUser.id }}">
+          Edit
+        </a>
+      </div>
+  
+      <div *ngIf="!CurrentUser">
+        <br />
+        <p>Please click on a User...</p>
+      </div>
+    </div>
+  </div>

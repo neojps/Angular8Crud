@@ -1,0 +1,75 @@
+<div *ngIf="CurrentUser" class="edit-form">
+  <h4>User</h4>
+  <form>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="CurrentUser.name"
+        name="name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="login">Login</label>
+      <input
+        type="text"
+        class="form-control"
+        id="login"
+        [(ngModel)]="CurrentUser.login"
+        name="login"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="pass">Pass</label>
+      <input
+        type="password"
+        class="form-control"
+        id="pass"
+        [(ngModel)]="CurrentUser.pass"
+        name="pass"
+      />
+    </div>
+    
+    <div class="form-group">
+      <label><strong>Active:</strong></label>
+      {{ CurrentUser.active ? "Yes" : "NO" }}
+    </div>
+    <div class="form-group">
+      <label><strong>Master:</strong></label>
+      {{ CurrentUser.master ? "Yes" : "NO" }}
+    </div>
+  </form>
+
+  <button
+    class="badge badge-primary mr-2"
+    *ngIf="CurrentUser.active"
+    (click)="deactivateUser()"
+  >
+    Deactivate
+  </button>
+  <button
+    *ngIf="!CurrentUser.active"
+    class="badge badge-primary mr-2"
+    (click)="activateUser()"
+  >
+    Activate
+  </button>
+
+  <button class="badge badge-danger mr-2" (click)="deleteUser()">
+    Delete
+  </button>
+
+  <button type="submit" class="badge badge-success" (click)="updateUser()">
+    Update
+  </button>
+  <p>{{ Message }}</p>
+</div>
+
+<div *ngIf="!CurrentUser">
+  <br />
+  <p>Cannot access this User...</p>
+</div>
